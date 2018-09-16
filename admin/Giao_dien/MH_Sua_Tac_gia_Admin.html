@@ -1,0 +1,102 @@
+
+<head>
+    <title>Sách</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/my_custom.css">
+</head>
+
+<body>
+    
+
+    <div class="container">
+        <div class="alert alert-success text-center book-mt10" id="Th_Thong_bao">
+            CẬP NHẬT TÁC GIẢ
+        </div>
+    </div>
+    <div class="container">
+        <div class="row book-mt10">
+            <button type="button" class="btn btn-success" id="Th_Dong_y">
+                Đồng ý
+            </button>
+            <button type="button" class="btn btn-danger" id="Th_Bo_qua">
+                Bỏ qua
+            </button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" id="Th_Cha">
+
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="../Xu_ly/Xu_ly_3L.js"></script>
+    <script>
+        Danh_sach_Cap_nhat = JSON.parse(sessionStorage.getItem("Danh_sach_Chon"))
+        //console.log(Danh_sach_Cap_nhat)
+        Tao_The_hien_Cap_nhat_Tac_gia(Th_Cha, Danh_sach_Cap_nhat)
+
+        function XL_Cap_Nhat_Tac_gia() {
+            var Danh_sach_Cap_nhat = document.querySelectorAll(".CAP_NHAP")
+
+            var Danh_sach = []
+            Danh_sach_Cap_nhat.forEach(Tac_gia => {
+
+                var Ma_so = Tac_gia.getAttribute("Ma_so")
+                var Tam = []
+
+                for (var i = 0; i < Tac_gia.cells.length; i++) {
+
+                    if (i == 1) {
+                        Tam.push(Tac_gia.cells[i].childNodes[0].value)
+                    }
+
+                    if (i == 2) {
+                        Tam.push(Tac_gia.cells[i].childNodes[0].value)
+                    }
+                }
+                if (Tam[0] == "") {
+                    Tam[0] = `Tên ${Ma_so}`
+                }
+                if (Tam[1] == "") {
+                    Tam[1] = `Mô tả ${Ma_so}`
+                }
+                var Tac_gia_Cap_nhat = {
+                    "Ma_so": Ma_so,
+                    "Tac_gia": Tam[0],
+                    "Mo_ta_tac_gia": Tam[1]
+                }
+                //console.log(Dien_thoai_Cap_nhat)
+                Danh_sach.push(Tac_gia_Cap_nhat)
+            })
+            //console.log(Danh_sach)
+            // Ghi Sửa  Điện thoai
+            var Kq = Ghi_Cap_nhap_Tac_gia(Danh_sach)
+            return Kq
+        }
+
+        Th_Dong_y.onclick = () => {
+            var Kq = XL_Cap_Nhat_Tac_gia()
+            document.getElementById("Th_Dong_y").disabled = true;
+            //console.log(Kq)
+            if (Kq == "OK") {
+                Th_Thong_bao.innerHTML = "Cập nhật thành công tác giả";
+                sessionStorage.removeItem("Danh_sach_Chon")
+                var delayInMilliseconds = 2000;
+                setTimeout(function () {
+                    window.location = "MH_Danh_sach_Tac_gia_Admin.html"
+                }, delayInMilliseconds);
+            }
+        }
+
+        Th_Bo_qua.onclick = () => {
+            sessionStorage.removeItem("Danh_sach_Chon")
+            window.location = "MH_Danh_sach_Tac_gia_Admin.html"
+        }
+    </script>
+</body>
+
+</html>

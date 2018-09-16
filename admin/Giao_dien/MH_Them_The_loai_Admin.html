@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sách</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/my_custom.css">
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="alert alert-success text-center book-mt10" id="Th_Thong_bao">
+            THÊM THỂ LOẠI
+        </div>
+    </div>
+    <div class="container">
+        <div class="row book-mt10">
+            <button type="button" class="btn btn-success" id="Th_Dong_y">
+                Đồng ý
+            </button>
+            <button type="button" class="btn btn-danger" id="Th_Bo_qua">
+                Bỏ qua
+            </button>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row" id="Th_Cha"></div>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="../Xu_ly/Xu_ly_3L.js"></script>
+    <script>
+        var Du_lieu = Doc_Danh_sach_The_loai();
+        var Danh_sach_The_loai = Du_lieu.Danh_sach_The_loai;
+        var Danh_sach_Xoa_The_loai = Doc_Danh_sach_Xoa_The_loai().Danh_sach_Xoa_The_loai
+        Tao_The_hien_Them_The_loai(Th_Cha);
+        Th_Nhom_The_loai.onchange();
+
+        function Lay_Ma_so_cuoi_The_loai() {
+            Nhom_The_loai = Th_Nhom_The_loai.value;
+            var Danh_sach_Ma_so = []
+
+            Danh_sach_The_loai.forEach(The_loai => {
+                var Thanh_phan_con = The_loai.Ma_so.trim().split("_")
+                Danh_sach_Ma_so.push(parseInt(Thanh_phan_con[2]))
+
+            })
+            Danh_sach_Xoa_The_loai.forEach(The_loai => {
+                var Thanh_phan_con = The_loai.Ma_so.trim().split("_")
+                Danh_sach_Ma_so.push(parseInt(Thanh_phan_con[2]))
+            })
+
+            Danh_sach_Ma_so.sort(function (a, b) {
+                return a - b
+            })
+
+            var Ma_so_Sau_cung = Danh_sach_Ma_so[Danh_sach_Ma_so.length - 1]
+            Ma_so_Sau_cung += 1
+            Th_Ma_so.value = Nhom_The_loai + "_" + Ma_so_Sau_cung.toString()
+        }
+
+        // Xử lý Xem trước Media
+        function Xem_truoc_Media() {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                Th_Hinh_Xem_truoc.src = e.target.result;
+                //console.log(e.target.result)
+            }
+            reader.readAsDataURL(Th_file.files[0]);
+
+        }
+
+        function XL_Ghi_Them_The_loai() {
+
+            var Ma_so = Th_Ma_so.value
+            var Ten = Th_Ten_the_loai.value
+            var Mo_ta = Th_Mo_ta_the_loai.value
+            var The_loai = {
+                "Ma_so": Ma_so,
+                "Ten_the_loai": Ten,
+                "Mo_ta_the_loai": Mo_ta
+            }
+            // Them Dien thoai
+            var The_loai = Ghi_The_loai_Moi(The_loai)
+            if (The_loai) {
+                Du_lieu.Danh_sach_The_loai.push(The_loai)
+
+                // // // Cập nhật Media
+                // var reader = new FileReader()
+                // var Chuoi_nhi_phan = ""
+                // var Ten_Hinh = `${Ma_so}.png`
+                // reader.onload = function (e) {
+                //     Chuoi_nhi_phan = e.target.result;
+                //     var Doi_tuong = { "Ten": Ten_Hinh, "Chuoi_nhi_phan": Chuoi_nhi_phan }
+                //     Kq = Ghi_Media(Doi_tuong)
+                // }
+                // reader.readAsDataURL(Th_file.files[0])
+            }
+
+        }
+
+        Th_Dong_y.onclick = () => {
+            if (document.getElementById("Th_Ten_the_loai").value != "") {
+                if (document.getElementById("Th_Mo_ta_the_loai").value != "") {
+                    var Kq = XL_Ghi_Them_The_loai()
+                    document.getElementById("Th_Dong_y").disabled = true;
+                    //if (Kq == "OK") {
+                    Th_Thong_bao.innerHTML = "Thêm thành công Thể loại mới";
+                    var delayInMilliseconds = 2000;
+                    setTimeout(function () {
+                        window.location = "MH_Danh_sach_The_loai_Admin.html"
+                    }, delayInMilliseconds);
+                    //}
+                } else {
+                    Th_Thong_bao.innerHTML = "Vui lòng nhập Mô tả thể loại";
+                    document.getElementById("Th_Mo_ta_the_loai").focus();
+                }
+            } else {
+                Th_Thong_bao.innerHTML = "Vui lòng nhập Tên thể loại";
+                document.getElementById("Th_Ten_the_loai").focus();
+            }
+
+        }
+
+        Th_Bo_qua.onclick = () => {
+            window.location = "MH_Danh_sach_The_loai_Admin.html"
+        }
+    </script>
+</body>
+
+</html>

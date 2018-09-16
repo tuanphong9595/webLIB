@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sách</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/my_custom.css">
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="alert alert-success text-center book-mt10" id="Th_Thong_bao">
+            CẬP NHẬT NHÀ PHÁT HÀNH
+        </div>
+    </div>
+    <div class="container">
+        <div class="row book-mt10">
+            <button type="button" class="btn btn-success" id="Th_Dong_y">
+                Đồng ý
+            </button>
+            <button type="button" class="btn btn-danger" id="Th_Bo_qua">
+                Bỏ qua
+            </button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" id="Th_Cha">
+
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="../Xu_ly/Xu_ly_3L.js"></script>
+    <script>
+        Danh_sach_Cap_nhat = JSON.parse(sessionStorage.getItem("Danh_sach_Chon"))
+
+        Tao_The_hien_Cap_nhat_Nha_phat_hanh(Th_Cha, Danh_sach_Cap_nhat)
+
+        function XL_Cap_Nhat_Nha_phat_hanh() {
+            var Danh_sach_Cap_nhat = document.querySelectorAll(".CAP_NHAP")
+
+            var Danh_sach = []
+            Danh_sach_Cap_nhat.forEach(Nha_phat_hanh => {
+
+                var Ma_so = Nha_phat_hanh.getAttribute("Ma_so")
+                var Tam = []
+
+                for (var i = 0; i < Nha_phat_hanh.cells.length; i++) {
+
+                    if (i == 1) {
+                        Tam.push(Nha_phat_hanh.cells[i].childNodes[0].value)
+
+                    }
+                    if (i == 2) {
+                        Tam.push(Nha_phat_hanh.cells[i].childNodes[0].value)
+                    }
+                }
+                if (Tam[0] == "") {
+                    Tam[0] = `Tên ${Ma_so}`
+                }
+                if (Tam[1] == "") {
+                    Tam[1] = `Mô tả ${Ma_so}`
+                }
+                var Nha_phat_hanh_Cap_nhat = {
+                    "Ma_so": Ma_so,
+                    "Nha_phat_hanh": Tam[0],
+                    "Mo_ta_nha_phat_hanh": Tam[1],
+
+                }
+                Danh_sach.push(Nha_phat_hanh_Cap_nhat)
+            })
+            var Kq = Ghi_Cap_nhap_Nha_phat_hanh(Danh_sach)
+            return Kq
+        }
+
+
+        Th_Dong_y.onclick = () => {
+            var Kq = XL_Cap_Nhat_Nha_phat_hanh()
+            document.getElementById("Th_Dong_y").disabled = true;
+            if (Kq == "OK") {
+                Th_Thong_bao.innerHTML = "Cập nhật thành công Nhà phát hành";
+                sessionStorage.removeItem("Danh_sach_Chon")
+                var delayInMilliseconds = 2000;
+                setTimeout(function () {
+                    window.location = "MH_Danh_sach_Nha_phat_hanh_Admin.html"
+                }, delayInMilliseconds);
+            }
+        }
+
+        Th_Bo_qua.onclick = () => {
+            sessionStorage.removeItem("Danh_sach_Chon")
+            window.location = "MH_Danh_sach_Nha_phat_hanh_Admin.html"
+        }
+
+    </script>
+</body>
+
+</html>

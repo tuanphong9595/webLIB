@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Danh sách Sách</title>
+	<!--/tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style_client.css" rel="stylesheet" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/my_custom.css">
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/my_custom.css">
+	<style>
+		.CHON {
+			opacity: 0.2;
+			filter: alpha(opacity=20);
+			/*IE 5-7*/
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-xs-12 book-mt10">
+				<input placeholder="Bạn muốn tìm sách gì ?" type="text" onkeyup="KeyCode(event)" id="Th_Gia_tri_Tim">
+				<i class="fa fa-search" id="Th_Tim"></i>
+			</div>
+			<div class="col-md-8 col-xs-12 book-mt10">
+				<select class="btn btn-success" onchange="Xuat_Sach_theo_Don_gia(this.value)">
+					<option value="0-999999">Lọc Sách theo Đơn giá Bán</option>
+					<option value="0-300000">Giá dưới 300.000</option>
+					<option value="300000-600000">Giá từ 300.000 đến 600.000</option>
+					<option value="600000-999999">Giá 600.000 trở lên</option>
+				</select>
+				<button class="btn btn-primary" style="margin-left: 5px;" id="Th_Tang" onclick="Sap_Tang()">
+					<i class="fa fa-sort-alpha-asc">&nbsp;Sắp tăng</i>
+					<button class="btn btn-primary" style="margin-left:5px;" id="Th_Giam" onclick="Sap_Giam()">
+						<i class="fa fa-sort-alpha-desc">&nbsp;Sắp giảm</i>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div id="Th_Thong_bao"></div>
+		<div id="Th_Phan_trang"></div>
+		<div class="row" id="Th_Cha"></div>
+	</div>
+	</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script src="../Xu_ly/Xu_ly_3L.js"></script>
+	<script src="js/my_function.js"></script>
+
+
+</body>
+
+</html>

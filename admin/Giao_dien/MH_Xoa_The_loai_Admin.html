@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sách</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+  <link rel="stylesheet" href="css/my_custom.css">
+</head>
+
+<body>
+    
+
+    <div class="container">
+        <div class="alert alert-success text-center book-mt10" id="Th_Thong_bao">
+           XOÁ THỂ LOẠI
+        </div>
+    </div>
+    <div class="container">
+        <div class="row book-mt10">
+            <button type="button" class="btn btn-success" id="Th_Dong_y">
+                Đồng ý
+            </button>
+            <button type="button" class="btn btn-danger" id="Th_Bo_qua">
+                Bỏ qua
+            </button>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row" id="Th_Cha">
+
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="../Xu_ly/Xu_ly_3L.js"></script>
+    <script>
+        Danh_sach_Cap_nhat = JSON.parse(sessionStorage.getItem("Danh_sach_Chon"))
+        //console.log(Danh_sach_Cap_nhat)
+        Tao_The_hien_Xoa_The_loai(Th_Cha, Danh_sach_Cap_nhat)
+
+        function XL_Xoa_The_loai() {
+            var Danh_sach_Cap_nhat = document.querySelectorAll(".CAP_NHAP")
+
+            var Danh_sach = []
+            Danh_sach_Cap_nhat.forEach(The_loai => {
+
+                var Ma_so = The_loai.getAttribute("Ma_so")
+                var The_loai_Xoa = {
+                    "Ma_so": Ma_so,
+                }
+                Danh_sach.push(The_loai_Xoa)
+            })
+
+            var Kq = Ghi_Xoa_The_loai(Danh_sach)
+            return Kq
+        }
+
+        Th_Dong_y.onclick = () => {
+            var Kq = XL_Xoa_The_loai()
+            document.getElementById("Th_Dong_y").disabled = true;
+            //console.log(Kq)
+            if (Kq == "OK") {
+                Th_Thong_bao.innerHTML = "Xóa thành công Thể loại";
+                sessionStorage.removeItem("Danh_sach_Chon")
+                var delayInMilliseconds = 2000;
+                setTimeout(function () {
+                    window.location = "MH_Danh_sach_The_loai_Admin.html"
+                }, delayInMilliseconds);
+            }
+
+        }
+
+        Th_Bo_qua.onclick = () => {
+            sessionStorage.removeItem("Danh_sach_Chon")
+            window.location = "MH_Danh_sach_The_loai_Admin.html"
+        }
+
+    </script>
+</body>
+
+</html>

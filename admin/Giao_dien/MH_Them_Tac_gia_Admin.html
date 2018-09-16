@@ -1,0 +1,124 @@
+<html lang="en">
+
+<head>
+    <title>Sách</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/my_custom.css">
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="alert alert-success text-center book-mt10" id="Th_Thong_bao">
+            THÊM TÁC GIẢ
+        </div>
+    </div>
+    <div class="container">
+        <div class="row book-mt10">
+            <button type="button" class="btn btn-success" id="Th_Dong_y">
+                Đồng ý
+            </button>
+            <button type="button" class="btn btn-danger" id="Th_Bo_qua">
+                Bỏ qua
+            </button>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row" id="Th_Cha"></div>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="../Xu_ly/Xu_ly_3L.js"></script>
+    <script>
+        var Du_lieu = Doc_Danh_sach_Tac_gia();
+        var Danh_sach_Tac_gia = Du_lieu.Danh_sach_Tac_gia
+        var Danh_sach_Xoa_Tac_gia = Doc_Danh_sach_Xoa_Tac_gia().Danh_sach_Xoa_Tac_gia
+        Tao_The_hien_Them_Tac_gia(Th_Cha)
+        Th_Nhom_Tac_gia.onchange()
+
+        function Lay_Ma_so_cuoi_Tac_gia() {
+            Nhom_Tac_gia = Th_Nhom_Tac_gia.value;
+            var Danh_sach_Ma_so = []
+
+            Danh_sach_Tac_gia.forEach(Tac_gia => {
+                var Thanh_phan_con = Tac_gia.Ma_so.trim().split("_")
+                Danh_sach_Ma_so.push(parseInt(Thanh_phan_con[2]))
+
+            })
+            Danh_sach_Xoa_Tac_gia.forEach(Tac_gia => {
+                var Thanh_phan_con = Tac_gia.Ma_so.trim().split("_")
+                Danh_sach_Ma_so.push(parseInt(Thanh_phan_con[2]))
+
+            })
+
+            Danh_sach_Ma_so.sort(function (a, b) {
+                return a - b
+            })
+
+            var Ma_so_Sau_cung = Danh_sach_Ma_so[Danh_sach_Ma_so.length - 1]
+            Ma_so_Sau_cung += 1
+            Th_Ma_so.value = Nhom_Tac_gia + "_" + Ma_so_Sau_cung.toString()
+        }
+
+        // Xử lý Xem trước Media
+        function Xem_truoc_Media() {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                Th_Hinh_Xem_truoc.src = e.target.result;
+            }
+            reader.readAsDataURL(Th_file.files[0]);
+
+        }
+
+        function XL_Ghi_Them_Tac_gia() {
+
+            var Ma_so = Th_Ma_so.value
+            var Ten = Th_Tac_gia.value
+            var Mo_ta = Th_Mo_ta_tac_gia.value
+            var Tac_gia = {
+                "Ma_so": Ma_so,
+                "Tac_gia": Ten,
+                "Mo_ta_tac_gia": Mo_ta
+            }
+
+            var Tac_gia = Ghi_Tac_gia_Moi(Tac_gia)
+            if (Tac_gia) {
+                Du_lieu.Danh_sach_Tac_gia.push(Tac_gia)
+            }
+        }
+
+        Th_Dong_y.onclick = () => {
+            if (document.getElementById("Th_Tac_gia").value != "") {
+                if (document.getElementById("Th_Mo_ta_tac_gia").value != "") {
+                    var Kq = XL_Ghi_Them_Tac_gia()
+                    document.getElementById("Th_Dong_y").disabled = true;
+                    //if (Kq == "OK") {
+                    Th_Thong_bao.innerHTML = "Thêm thành công Tác giả mới";
+                    var delayInMilliseconds = 2000;
+                    setTimeout(function () {
+                        window.location = "MH_Danh_sach_Tac_gia_Admin.html"
+                    }, delayInMilliseconds);
+                    //}
+                } else {
+                    Th_Thong_bao.innerHTML = "Vui lòng nhập Mô tả tác giả";
+                    document.getElementById("Th_Mo_ta_tac_gia").focus();
+                }
+            } else {
+                Th_Thong_bao.innerHTML = "Vui lòng nhập Tên Tác giả";
+                document.getElementById("Th_Tac_gia").focus();
+            }
+
+        }
+
+        Th_Bo_qua.onclick = () => {
+            window.location = "MH_Danh_sach_Tac_gia_Admin.html"
+        }
+    </script>
+</body>
+
+</html>

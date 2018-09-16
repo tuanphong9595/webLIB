@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUẢN LÝ SÁCH</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/my_custom.css">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        #Khung_Chuc_nang {
+            width: 100%;
+            height: 1000vh;
+            border: none;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body class="">
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div id="Th_Nguoi_dung"></div>
+                    </li>
+                    <li>
+                        <a href="MH_Chinh_Sach_Admin.html">
+                            <i class="fa fa-book"></i>
+                            <span class="nav-label">QUẢN LÝ SÁCH</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="MH_Chinh_The_loai_Admin.html">
+                            <i class="fa fa-list-alt"></i>
+                            <span class="nav-label">QUẢN LÝ THỂ LOẠI</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="MH_Chinh_Tac_gia_Admin.html">
+                            <i class="fa fa-user"></i>
+                            <span class="nav-label">QUẢN LÝ TÁC GIẢ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="MH_Chinh_Nha_phat_hanh_Admin.html">
+                            <i class="fa fa-car"></i>
+                            <span class="nav-label">QUẢN LÝ NHÀ PHÁT HÀNH</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <span class="welcome-message">
+                                <i class="fa fa-bell"></i> Chào mừng bạn đến với trang Quản lý
+                            </span>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-outline-danger" id="Th_Thoat" onclick="XL_Thoat_Dang_nhap()">
+                                <i class="fa fa-sign-out"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <button class="btn btn-success dim" type="button" id="Th_Trang_chu">
+                        <i class="fa fa-home"></i>&nbsp;Home</button>
+                    <button class="btn btn-info dim" type="button" id="Th_Them">
+                        <i class="fa fa-plus"></i>&nbsp;Thêm</button>
+                    <button class="btn btn-warning dim" type="button" id="Th_Sua">
+                        <i class="fa fa-edit"></i>&nbsp;Sửa</button>
+                    <button class="btn btn-danger dim" type="button" id="Th_Xoa">
+                        <i class="fa fa-trash"></i>&nbsp;Xoá</button>
+                    <button class="btn btn-primary dim" type="button" id="Th_Phuc_hoi">
+                        <i class="fa fa-undo"></i>&nbsp;Phục hồi</button>
+                </div>
+            </div>
+
+            <div class="wrapper wrapper-content">
+                <div class="container-fluid">
+                    <iframe id="Khung_Chuc_nang"></iframe>
+                </div>
+            </div>
+            <div class="footer">
+                <div>
+                    <strong>Trang quản trị sách Admin | 2018</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mainly scripts -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+    <script src="../Xu_ly/Xu_ly_3L.js"></script>
+
+    <script>
+        if (!sessionStorage.getItem("Nguoi_dung")) {
+            window.location = "MH_Dang_nhap_Admin.html"
+        }
+        var Du_lieu = Doc_Danh_sach_Sach();
+
+        var Cua_hang = Du_lieu.Cua_hang
+        Xuat_Thong_tin_Cua_hang(Cua_hang)
+
+
+        function XL_Thoat_Dang_nhap() {
+            sessionStorage.clear()
+            window.location = "MH_Dang_nhap_Admin.html"
+        }
+
+        function Xuat_Thong_tin_Cua_hang(Cua_hang) {
+            if (sessionStorage.getItem("Nguoi_dung")) {
+                var Kq = JSON.parse(sessionStorage.getItem("Nguoi_dung"))
+                var noi_dung_HTML =
+                    `<div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="https://book-media.herokuapp.com/${Kq.Ma_so}.png" style="width:5em" />
+                             </span>
+                                <span class="block m-t-xs"> <strong class="font-bold text-white">Chào  ${Kq.Nhom_Nguoi_dung.Ten} ${Kq.Ten}</strong>
+                                </span>
+                            </div>`
+                Th_Nguoi_dung.innerHTML = noi_dung_HTML
+            }
+        }
+
+        Th_Trang_chu.onclick = () => {
+            var trang = "MH_Danh_sach_Sach_Admin.html"
+            Hien_thi_Trang(trang)
+        }
+        Th_Them.onclick = () => {
+            var trang = "MH_Them_Sach_Admin.html"
+            Hien_thi_Trang(trang)
+
+        }
+        Th_Sua.onclick = () => {
+            var trang = "MH_Sua_Sach_Admin.html"
+            XL_Danh_sach_Chon(trang)
+        }
+
+        Th_Xoa.onclick = () => {
+            var trang = "MH_Xoa_Sach_Admin.html"
+            XL_Danh_sach_Chon(trang)
+        }
+
+        Th_Phuc_hoi.onclick = () => {
+            var trang = "MH_Phuc_hoi_Sach_Admin.html"
+            Hien_thi_Trang(trang)
+        }
+
+
+
+        Th_Trang_chu.click()
+
+
+        function Hien_thi_Trang(trang_hien_thi) {
+            Khung_Chuc_nang.src = trang_hien_thi
+        }
+
+        function XL_Danh_sach_Chon(trang_hien_thi) {
+            //console.log(Khung_Chuc_nang.contentWindow.document.querySelectorAll(".CHON"))
+            var Sach_Chon = Khung_Chuc_nang.contentWindow.document.querySelectorAll(".CHON")
+            var Danh_sach_Chon = []
+            Sach_Chon.forEach(Sach_Chon => {
+                //console.log(Dien_thoai.parentNode.getAttribute("data"))
+                var thong_tin = JSON.parse(Sach_Chon.parentNode.getAttribute("data"))
+                Danh_sach_Chon.push(thong_tin)
+            })
+            if (Danh_sach_Chon.length > 0) {
+                var Chuoi_Danh_sach_Chon = JSON.stringify(Danh_sach_Chon)
+                sessionStorage.setItem("Danh_sach_Chon", Chuoi_Danh_sach_Chon)
+                Hien_thi_Trang(trang_hien_thi)
+            }
+        }
+    </script>
+</body>
+
+</html>

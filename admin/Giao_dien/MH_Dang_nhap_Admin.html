@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐĂNG NHẬP BÁN SÁCH</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+            <div class="alert alert-success text-center" id="Th_Thong_bao">
+                KHUNG THÔNG BÁO
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="font-bold">TRANG QUẢN TRỊ SÁCH</h2>
+                    <p>
+                        Chào mừng bạn đến với trang quản trị Sách :)
+                    </p>
+                </div>
+                <div class="container-fluid">
+                    <div class="row" id="Th_Cha"></div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6 text-right">
+                    <small>Quản trị Sách Admin © 2018</small>
+                </div>
+            </div>
+        </div>
+
+        <script src="../Xu_ly/Xu_ly_3L.js"></script>
+        <script>
+            if (!sessionStorage.getItem("Nguoi_dung")) {
+                Tao_The_hien_Dang_nhap(Th_Cha)
+                Th_Dang_nhap.onclick = () => {
+                    var Thong_tin = {}
+                    Thong_tin.Ten_Dang_nhap = Th_Ten_Dang_nhap.value
+                    Thong_tin.Mat_khau = Th_Mat_khau.value
+                    XL_Dang_nhap(Thong_tin)
+                }
+            } else {
+                window.location = 'MH_Chinh.html'
+            }
+
+            function XL_Dang_nhap(Thong_tin) {
+                var Kq = Dang_nhap_He_thong(Thong_tin)
+                if ("Ma_so" in Kq) {
+                    sessionStorage.setItem("Nguoi_dung", JSON.stringify(Kq))
+                    //window.location = 'MH_Chinh.html'
+                    window.location = 'MH_Chinh_Sach_Admin.html'
+                } else {
+                    Th_Thong_bao.innerHTML = "Thông tin đăng nhập không hợp lệ ..."
+                }
+            }
+
+            function validate() {
+            if (document.myForm.name.value == "") {
+                alert("Vui lòng nhập Tên đăng nhập.");
+                document.myForm.name.focus();
+                return false;
+            }
+            if (document.myForm.password.value == "") {
+                alert("Vui lòng nhập Mật khẩu.");
+                document.myForm.name.focus();
+                return false;
+            }
+
+            return (true);
+        }
+        </script>
+</body>
+
+</html>

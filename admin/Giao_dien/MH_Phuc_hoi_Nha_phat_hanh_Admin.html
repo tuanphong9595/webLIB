@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sách</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/my_custom.css">
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="alert alert-success text-center book-mt10" id="Th_Thong_bao">PHỤC HỒI NHÀ PHÁT HÀNH</div>
+    </div>
+    <div class="container">
+        <div class="row book-mt10">
+            <button type="button" class="btn btn-success" id="Th_Dong_y">Đồng ý</button>
+            <button type="button" class="btn btn-danger" id="Th_Bo_qua">Bỏ qua</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" id="Th_Cha">
+
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="../Xu_ly/Xu_ly_3L.js"></script>
+    <script>
+        var Du_lieu = Doc_Danh_sach_Xoa_Nha_phat_hanh();
+        var Danh_sach_Xoa_Nha_phat_hanh = Du_lieu.Danh_sach_Xoa_Nha_phat_hanh
+        //console.log(Danh_sach_Thanh_ly)
+        Tao_The_hien_Phuc_hoi_Nha_phat_hanh(Th_Cha, Danh_sach_Xoa_Nha_phat_hanh)
+        if (Danh_sach_Xoa_Nha_phat_hanh.length == 0) {
+            document.getElementById("Th_Dong_y").disabled = true;
+        }
+        function XL_Phuc_hoi_Nha_phat_hanh() {
+            var Danh_sach_Phuc_hoi = document.querySelectorAll(".PHUC_HOI")
+
+            var Danh_sach = []
+            Danh_sach_Phuc_hoi.forEach(Nha_phat_hanh => {
+                if (Nha_phat_hanh.checked) {
+                    var Ma_so = Nha_phat_hanh.getAttribute("Ma_so")
+                    var Nha_phat_hanh_Phuc_hoi = {
+                        "Ma_so": Ma_so,
+                    }
+                    Danh_sach.push(Nha_phat_hanh_Phuc_hoi)
+                }
+
+            })
+
+            //console.log(Danh_sach)
+            // Ghi Phục hồi  Điện thoai
+            var Kq = Ghi_Phuc_hoi_Nha_phat_hanh(Danh_sach)
+            return Kq
+
+        }
+
+        Th_Dong_y.onclick = () => {
+            var Danh_sach_Phuc_hoi = document.querySelectorAll(".PHUC_HOI")
+            Danh_sach_Phuc_hoi.forEach(Nha_phat_hanh => {
+                Th_Thong_bao.innerHTML = "Vui lòng check vào ô vuông để chọn Nhà phát hành cần phục hồi";
+                if (Nha_phat_hanh.checked) {
+                    var Kq = XL_Phuc_hoi_Nha_phat_hanh()
+                    document.getElementById("Th_Dong_y").disabled = true;
+                    //console.log(Kq)
+                    if (Kq == "OK") {
+                        Th_Thong_bao.innerHTML = "Phục hồi thành công nhà phát hành";
+                        sessionStorage.removeItem("Danh_sach_Chon")
+                        var delayInMilliseconds = 1500;
+                        setTimeout(function () {
+                            window.location = "MH_Phuc_hoi_Nha_phat_hanh_Admin.html"
+                        }, delayInMilliseconds);
+                    }
+                }
+                 
+                // else {
+                //     Th_Thong_bao.innerHTML = "Vui lòng check vào ô vuông để chọn Nhà phát hành cần phục hồi";
+                //     return false
+                // }
+            })
+
+
+        }
+
+        Th_Bo_qua.onclick = () => {
+            window.location = "MH_Danh_sach_Nha_phat_hanh_Admin.html"
+        }
+    </script>
+</body>
+
+</html>

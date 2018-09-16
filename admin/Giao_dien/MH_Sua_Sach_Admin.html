@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sách</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/my_custom.css">
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="alert alert-success text-center book-mt10" id="Th_Thong_bao">
+            CẬP NHẬT SÁCH
+        </div>
+    </div>
+    <div class="container">
+        <div class="row book-mt10">
+            <button type="button" class="btn btn-success" id="Th_Dong_y">
+                Đồng ý
+            </button>
+            <button type="button" class="btn btn-danger" id="Th_Bo_qua">
+                Bỏ qua
+            </button>
+        </div>
+    </div><br>
+    <div class="container">
+        <div class="row" id="Th_Cha"></div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="../Xu_ly/Xu_ly_3L.js"></script>
+    <script>
+        Danh_sach_Cap_nhat = JSON.parse(sessionStorage.getItem("Danh_sach_Chon"))
+        //console.log(Danh_sach_Cap_nhat)
+        if (Danh_sach_Cap_nhat.length == 1) {
+            var Danh_sach_The_loai = Doc_Danh_sach_The_loai().Danh_sach_The_loai
+            var Danh_sach_Tac_gia = Doc_Danh_sach_Tac_gia().Danh_sach_Tac_gia
+            var Danh_sach_Nha_phat_hanh = Doc_Danh_sach_Nha_phat_hanh().Danh_sach_Nha_phat_hanh
+
+            Tao_The_hien_Cap_nhat_Sach(Th_Cha, Danh_sach_Cap_nhat)
+            Tao_The_hien_List_Cap_nhat_The_loai(Th_Nhom_The_loai, Danh_sach_The_loai, Danh_sach_Cap_nhat)
+            Tao_The_hien_List_Cap_nhat_Tac_gia(Th_Nhom_Tac_gia, Danh_sach_Tac_gia, Danh_sach_Cap_nhat)
+            Tao_The_hien_List_Cap_nhat_Nha_phat_hanh(Th_Nhom_Nha_phat_hanh, Danh_sach_Nha_phat_hanh, Danh_sach_Cap_nhat)
+        } else {
+            document.getElementById("Th_Dong_y").disabled = true;
+            Th_Thong_bao.innerHTML = "Chỉ cho phép SỬA 1 lần 1 SÁCH. Sau 3s sẽ về màn hình Danh sách Sách";
+            var delayInMilliseconds = 3000;
+            setTimeout(function () {
+                window.location = "MH_Danh_sach_Sach_Admin.html"
+            }, delayInMilliseconds);
+        }
+
+        function Lay_Ma_so_cuoi_The_loai() {
+            Nhom_The_loai = Th_Nhom_The_loai.value;
+            Th_The_loai.value = Nhom_The_loai
+        }
+
+        function Lay_Ma_so_cuoi_Tac_gia() {
+            Nhom_Tac_gia = Th_Nhom_Tac_gia.value;
+            Th_Tac_gia.value = Nhom_Tac_gia
+        }
+
+        function Lay_Ma_so_cuoi_Nha_phat_hanh() {
+            Nhom_Nha_phat_hanh = Th_Nhom_Nha_phat_hanh.value;
+            Th_Nha_phat_hanh.value = Nhom_Nha_phat_hanh
+        }
+
+        function XL_Cap_Nhat_Sach() {
+            var Danh_sach_Cap_nhat = document.querySelectorAll(".CAP_NHAP")
+
+            var Danh_sach = []
+            Danh_sach_Cap_nhat.forEach(Sach => {
+                var Ma_so = Sach.getAttribute("Ma_so")
+                var Ten = Th_Ten.value
+                var Don_gia_Ban = Th_Don_gia_Ban.value
+                var Mo_ta = Th_Mo_ta.value
+                var Tac_gia = Th_Tac_gia.value
+                var The_loai = Th_The_loai.value
+                var Nha_phat_hanh = Th_Nha_phat_hanh.value
+                var Sach_Cap_nhat = {
+                    "Ten": Ten,
+                    "Ma_so": Ma_so,
+                    "Don_gia_Ban": Don_gia_Ban,
+                    "Mo_ta": Mo_ta,
+                    "Nhom_Sach": {
+                        "Ten_the_loai": The_loai,
+                        "Tac_gia": Tac_gia,
+                        "Nha_phat_hanh": Nha_phat_hanh
+                    }
+                }
+
+                Danh_sach.push(Sach_Cap_nhat)
+            })
+            var Kq = Ghi_Cap_nhap_Sach(Danh_sach)
+            return Kq
+        }
+
+        Th_Dong_y.onclick = () => {
+            if (Danh_sach_Cap_nhat.length == 1) {
+
+                if (document.getElementById("Th_Ten").value != "") {
+                    if (document.getElementById("Th_Don_gia_Ban").value != "") {
+                        var x
+                        x = document.getElementById("Th_Don_gia_Ban").value
+                        if (isNaN(x) || x < 1 || x > 999999) {
+                            Th_Thong_bao.innerHTML = "Vui lòng nhập Đơn giá bán từ 1 đến 999999";
+                            document.getElementById("Th_Don_gia_Ban").focus();
+                        } else {
+                            if (document.getElementById("Th_Mo_ta").value != "") {
+
+                                var Kq = XL_Cap_Nhat_Sach()
+                                document.getElementById("Th_Dong_y").disabled = true;
+                                if (Kq == "OK") {
+                                    Th_Thong_bao.innerHTML = "Cập nhật thành công Sách";
+                                    sessionStorage.removeItem("Danh_sach_Chon")
+                                    var delayInMilliseconds = 2000;
+                                    setTimeout(function () {
+                                        window.location = "MH_Danh_sach_Sach_Admin.html"
+                                    }, delayInMilliseconds);
+                                }
+
+                            }
+                            else {
+                                Th_Thong_bao.innerHTML = "Vui lòng nhập Mô tả.";
+                                document.getElementById("Th_Mo_ta").focus();
+                            }
+                        }
+                    }
+                    else {
+                        Th_Thong_bao.innerHTML = "Vui lòng nhập hoặc nhập lại Đơn giá bán.";
+                        document.getElementById("Th_Don_gia_Ban").focus();
+                    }
+                }
+                else {
+                    Th_Thong_bao.innerHTML = "Vui lòng nhập tên Sách.";
+                    document.getElementById("Th_Ten").focus();
+                }
+
+
+
+
+            }
+        }
+
+        Th_Bo_qua.onclick = () => {
+            sessionStorage.removeItem("Danh_sach_Chon")
+            window.location = "MH_Danh_sach_Sach_Admin.html"
+        }
+    </script>
+</body>
+
+</html>

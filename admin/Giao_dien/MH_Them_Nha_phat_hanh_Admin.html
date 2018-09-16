@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sách</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/my_custom.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="alert alert-success text-center book-mt10" id="Th_Thong_bao">
+            THÊM NHÀ PHÁT HÀNH
+        </div>
+    </div>
+    <div class="container">
+        <div class="row book-mt10">
+            <button type="button" class="btn btn-success" id="Th_Dong_y">
+                Đồng ý
+            </button>
+            <button type="button" class="btn btn-danger" id="Th_Bo_qua">
+                Bỏ qua
+            </button>
+        </div>
+    </div>
+    <br>
+
+
+    <div class="container">
+        <div class="row" id="Th_Cha"></div>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="../Xu_ly/Xu_ly_3L.js"></script>
+    <script>
+        var Du_lieu = Doc_Danh_sach_Nha_phat_hanh();
+        var Danh_sach_Nha_phat_hanh = Du_lieu.Danh_sach_Nha_phat_hanh
+        var Danh_sach_Xoa_Nha_phat_hanh = Doc_Danh_sach_Xoa_Nha_phat_hanh().Danh_sach_Xoa_Nha_phat_hanh
+        Tao_The_hien_Them_Nha_phat_hanh(Th_Cha)
+        Th_Nhom_Nha_phat_hanh.onchange()
+
+        function Lay_Ma_so_cuoi_Nha_phat_hanh() {
+            Nhom_Nha_phat_hanh = Th_Nhom_Nha_phat_hanh.value;
+            var Danh_sach_Ma_so = []
+            Danh_sach_Nha_phat_hanh.forEach(Nha_phat_hanh => {
+                var Thanh_phan_con = Nha_phat_hanh.Ma_so.trim().split("_")
+                Danh_sach_Ma_so.push(parseInt(Thanh_phan_con[3]))
+            })
+            Danh_sach_Xoa_Nha_phat_hanh.forEach(Nha_phat_hanh => {
+                var Thanh_phan_con = Nha_phat_hanh.Ma_so.trim().split("_")
+                Danh_sach_Ma_so.push(parseInt(Thanh_phan_con[3]))
+            })
+
+            Danh_sach_Ma_so.sort(function (a, b) {
+                return a - b
+            })
+
+            var Ma_so_Sau_cung = Danh_sach_Ma_so[Danh_sach_Ma_so.length - 1]
+            Ma_so_Sau_cung += 1
+            Th_Ma_so.value = Nhom_Nha_phat_hanh + "_" + Ma_so_Sau_cung.toString()
+        }
+
+        // Xử lý Xem trước Media
+        function Xem_truoc_Media() {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                Th_Hinh_Xem_truoc.src = e.target.result;
+                //console.log(e.target.result)
+            }
+            reader.readAsDataURL(Th_file.files[0]);
+
+        }
+        function XL_Ghi_Them() {
+
+            var Ma_so = Th_Ma_so.value
+            var Nha_phat_hanh = Th_Ten.value
+            var Mo_ta_nha_phat_hanh = Th_Mo_ta_nha_phat_hanh.value
+            var Nha_phat_hanh = {
+                "Ma_so": Ma_so,
+                "Nha_phat_hanh": Nha_phat_hanh,
+                "Mo_ta_nha_phat_hanh": Mo_ta_nha_phat_hanh,
+            }
+
+            var Nha_phat_hanh = Ghi_Nha_phat_hanh_Moi(Nha_phat_hanh)
+            if (Nha_phat_hanh) {
+                Du_lieu.Danh_sach_Nha_phat_hanh.push(Nha_phat_hanh)
+            }
+
+        }
+
+        Th_Dong_y.onclick = () => {
+            if (document.getElementById("Th_Ten").value != "") {
+                if (document.getElementById("Th_Mo_ta_nha_phat_hanh").value != "") {
+                    var Kq = XL_Ghi_Them()
+                    document.getElementById("Th_Dong_y").disabled = true;
+                    //if (Kq == "OK") {
+                        Th_Thong_bao.innerHTML = "Thêm thành công Nhà phát hành mới";
+                        var delayInMilliseconds = 2000;
+                        setTimeout(function () {
+                            window.location = "MH_Danh_sach_Nha_phat_hanh_Admin.html"
+                        }, delayInMilliseconds);
+                    //}
+                } else {
+                    Th_Thong_bao.innerHTML = "Vui lòng nhập Mô tả nhà phát hảnh";
+                    document.getElementById("Th_Mo_ta_nha_phat_hanh").focus();
+                }
+            } else {
+                Th_Thong_bao.innerHTML = "Vui lòng nhập Tên nhà phát hành";
+                document.getElementById("Th_Ten").focus();
+            }
+
+        }
+
+        Th_Bo_qua.onclick = () => {
+            window.location = "MH_Danh_sach_Nha_phat_hanh_Admin.html"
+        }
+    </script>
+</body>
+
+</html>

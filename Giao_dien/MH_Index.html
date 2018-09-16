@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>TRANG BÁN SÁCH</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/my_custom.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/font-awesome.css" rel="stylesheet">
+</head>
+
+<body>
+	<!-- header-bot -->
+	<div class="header-bot" id="home">
+		<div class="header-bot_inner_wthreeinfo_header_mid">
+			<!-- header-bot -->
+			<div class="col-md-4 logo_agile">
+				<h1>
+					<a href="MH_Index.html">
+						<span>LIB</span>BookStore</a>
+				</h1>
+			</div>
+			<!-- header-bot -->
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- //header-bot -->
+	<!-- banner -->
+	<div class="ban-top">
+		<div class="container">
+			<div class="top_nav_left">
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+							 aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav menu__list">
+								<li class="active menu__item menu__item--current">
+									<a class="menu__link" href="MH_Index.html">Trang chủ
+										<span class="sr-only">(current)</span>
+									</a>
+								</li>
+								<li class=" menu__item">
+									<a class="menu__link" href="MH_Gioi_thieu.html">Giới thiệu</a>
+								</li>
+								<li class=" menu__item">
+									<a class="menu__link" href="MH_Lien_he.html">Liên hệ</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- //banner-top -->
+	<!-- banner -->
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+			<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<div class="container">
+					<div class="carousel-caption">
+						<h3>Sách giảm giá
+							<span>29%</span>
+						</h3>
+						<p>Đặc biệt cho hôm nay</p>
+						<a class="hvr-outline-out button2" href="MH_Lien_he.html">Liên hệ </a>
+					</div>
+				</div>
+			</div>
+			<div class="item item2">
+				<div class="container">
+					<div class="carousel-caption">
+						<h3>Sách giảm giá
+							<span>29%</span>
+						</h3>
+						<p>Đặc biệt cho hôm nay</p>
+						<a class="hvr-outline-out button2" href="MH_Lien_he.html">Liên hệ </a>
+					</div>
+				</div>
+			</div>
+			<div class="item item3">
+				<div class="container">
+					<div class="carousel-caption">
+						<h3>Sách giảm giá
+							<span>29%</span>
+						</h3>
+						<p>Đặc biệt cho hôm nay</p>
+						<a class="hvr-outline-out button2" href="MH_Lien_he.html">Liên hệ </a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+		<!-- The Modal -->
+	</div>
+
+
+	<!-- /new_arrivals -->
+	<div class="new_arrivals_agile_w3ls_info">
+		<div class="container">
+			<h3 class="wthree_text_info">Cửa hàng
+				<span>Sách</span>
+			</h3>
+
+			<div class="container">
+				<div class="row">
+					<div id="Th_Thong_bao"></div>
+				</div>
+				<div class="row">
+					<div class="btn">
+						<input placeholder="Bạn muốn tìm sách gì ?" type="text" onkeyup="KeyCode(event)" style="width:20rem" id="Th_Gia_tri_Tim">
+						<i class="fa fa-search" id="Th_Tim"></i>
+					</div>
+					<div class="btn">
+						<select class="book-select" onchange="Xuat_Sach_theo_Don_gia(this.value)">
+							<option value="0-999999">Lọc Sách theo Đơn giá Bán</option>
+							<option value="0-300000">Giá dưới 300.000</option>
+							<option value="300000-600000">Giá từ 300.000 đến 600.000</option>
+							<option value="600000-999999">Giá 600.000 trở lên</option>
+						</select>
+					</div>
+					<button type="button" class="btn btn-info" id="Th_Tang" onclick="Sap_Tang()">
+						<i class="fa fa-sort-alpha-asc"></i>
+					</button>
+					<button type="button" class="btn btn-info" id="Th_Giam" onclick="Sap_Giam()">
+						<i class="fa fa-sort-alpha-desc"></i>
+					</button>
+				</div>
+				<div class="row book-category">
+					<div class="col-md-3 col-xs-12 book-mt7">
+						<span id="Th_Trang_chu" class="btn">
+							<i class="fa fa-book" aria-hidden="true"></i> Tất Cả Sách</span>
+					</div>
+					<div class="col-md-3 col-xs-12 book-mt15">
+						<span>
+							<i class="fa fa-list-alt" aria-hidden="true"></i> Thể loại</span>
+						<select id="Th_Nhom_the_loai_Index" class="book-select" onclick="Xuat_Sach_theo_The_loai(this.value)">
+
+						</select>
+					</div>
+					<div class="col-md-3 col-xs-12 book-mt15">
+						<span>
+							<i class="fa fa-user" aria-hidden="true"></i> Tác giả</span>
+						<select id="Th_Nhom_tac_gia_Index" class="book-select" onclick="Xuat_Sach_theo_Tac_gia(this.value)">
+
+						</select>
+					</div>
+					<div class="col-md-3 col-xs-12">
+						<span>
+							<i class="fa fa-address-book" aria-hidden="true"></i> Nhà phát hành</span>
+						<select id="Th_Nhom_nha_phat_hanh_Index" class="book-select" onclick="Xuat_Sach_theo_NPH(this.value)">
+
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div id="Th_Phan_trang"></div>
+			<div class="container">
+				<div class="row" id="Th_Cha"></div>
+				<div id="Th_Chi_tiet"></div>
+			</div>
+
+		</div>
+	</div>
+	</div>
+	</div>
+	<!-- //new_arrivals -->
+
+	<!-- //banner -->
+	<div class="banner_bottom_agile_info">
+		<div class="container">
+			<div class="banner_bottom_agile_info_inner_w3ls">
+				<div class="col-md-6 wthree_banner_bottom_grid_three_left1 grid">
+					<figure class="effect-roxy">
+						<img src="images/bottom1.jpg" alt=" " class="img-responsive" />
+						<figcaption>
+							<h3>
+								<span>F</span>all Ahead</h3>
+							<p>New Arrivals</p>
+						</figcaption>
+					</figure>
+				</div>
+				<div class="col-md-6 wthree_banner_bottom_grid_three_left1 grid">
+					<figure class="effect-roxy">
+						<img src="images/bottom2.jpg" alt=" " class="img-responsive" />
+						<figcaption>
+							<h3>
+								<span>F</span>all Ahead</h3>
+							<p>New Arrivals</p>
+						</figcaption>
+					</figure>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!--/grids-->
+
+
+	</div>
+	</div>
+	<!-- //new_arrivals -->
+	<a href="#home" class="scroll" id="toTop" style="display: block;">
+		<span id="toTopHover" style="opacity: 1;"> </span>
+	</a>
+
+	<!--/grids-->
+	<div class="coupons">
+		<div class="coupons-grids text-center">
+			<div class="w3layouts_mail_grid">
+				<div class="col-md-3 w3layouts_mail_grid_left">
+					<div class="w3layouts_mail_grid_left1 hvr-radial-out">
+						<i class="fa fa-truck" aria-hidden="true"></i>
+					</div>
+					<div class="w3layouts_mail_grid_left2">
+						<h3>MIỄN PHÍ GIAO HÀNG</h3>
+						<p>Dành cho đơn hàng từ 99.000đ</p>
+					</div>
+				</div>
+				<div class="col-md-3 w3layouts_mail_grid_left">
+					<div class="w3layouts_mail_grid_left1 hvr-radial-out">
+						<i class="fa fa-headphones" aria-hidden="true"></i>
+					</div>
+					<div class="w3layouts_mail_grid_left2">
+						<h3>HỖ TRỢ 24/7</h3>
+						<p>Nhiệt tình giải đáp thắc mắc của bạn.</p>
+					</div>
+				</div>
+				<div class="col-md-3 w3layouts_mail_grid_left">
+					<div class="w3layouts_mail_grid_left1 hvr-radial-out">
+						<i class="fa fa-shopping-bag" aria-hidden="true"></i>
+					</div>
+					<div class="w3layouts_mail_grid_left2">
+						<h3>THANH TOÁN TIỆN LỢI</h3>
+						<p>Qua thẻ ATM hoặc tiền mặt tại nhà.</p>
+					</div>
+				</div>
+				<div class="col-md-3 w3layouts_mail_grid_left">
+					<div class="w3layouts_mail_grid_left1 hvr-radial-out">
+						<i class="fa fa-gift" aria-hidden="true"></i>
+					</div>
+					<div class="w3layouts_mail_grid_left2">
+						<h3>MÃ GIẢM GIÁ KHỦNG</h3>
+						<p>Giảm giá sách khi nhập mã lên đến 29%.</p>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+
+		</div>
+	</div>
+	<!--grids-->
+
+	<!-- footer -->
+	<div class="footer">
+		<div class="footer_agile_inner_info_w3l">
+			<div class="col-md-3 footer-left">
+				<h2>
+					<a href="MH_Index.html">
+						<span>LIB</span>BOOKSTORE </a>
+				</h2>
+				<p>Công ty là đơn vị kinh doanh đã nhiều năm trong lĩnh vực xuất bản, in và phát hành. Từ năm 1991, nhà sách lần đầu
+					tiên đi vào hoạt động tại quận Tân Bình đã nhận được sự ủng hộ nhiệt tình của đông đảo bạn đọc và khách hàng.</p>
+				<ul class="social-nav model-3d-0 footer-social w3_agile_social two">
+					<li>
+						<a href="#" class="facebook">
+							<div class="front">
+								<i class="fa fa-facebook" aria-hidden="true"></i>
+							</div>
+							<div class="back">
+								<i class="fa fa-facebook" aria-hidden="true"></i>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="twitter">
+							<div class="front">
+								<i class="fa fa-twitter" aria-hidden="true"></i>
+							</div>
+							<div class="back">
+								<i class="fa fa-twitter" aria-hidden="true"></i>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="instagram">
+							<div class="front">
+								<i class="fa fa-instagram" aria-hidden="true"></i>
+							</div>
+							<div class="back">
+								<i class="fa fa-instagram" aria-hidden="true"></i>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="pinterest">
+							<div class="front">
+								<i class="fa fa-linkedin" aria-hidden="true"></i>
+							</div>
+							<div class="back">
+								<i class="fa fa-linkedin" aria-hidden="true"></i>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-9 footer-right">
+				<div class="sign-grds">
+					<div class="col-md-4 sign-gd">
+						<h4>VỀ CHÚNG TÔI</h4>
+						<ul>
+							<li>
+								<a href="MH_Index.html">Trang chủ</a>
+							</li>
+							<li>
+								<a href="MH_Gioi_thieu.html">Giới thiệu</a>
+							</li>
+							<li>
+								<a href="MH_Lien_he.html">Liên hệ</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-md-5 sign-gd-two">
+						<h4>THÔNG TIN CỬA HÀNG</span>
+						</h4>
+						<div class="w3-address">
+							<div class="w3-address-grid">
+								<div class="w3-address-left">
+									<i class="fa fa-phone" aria-hidden="true"></i>
+								</div>
+								<div class="w3-address-right">
+									<h6>Hotline</h6>
+									<p>0122.999.9999</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="w3-address-grid">
+								<div class="w3-address-left">
+									<i class="fa fa-envelope" aria-hidden="true"></i>
+								</div>
+								<div class="w3-address-right">
+									<h6>Địa chỉ Email</h6>
+									<p>Email :
+										<a href="mailto:quanlywebsachTP@gmail.com">quanlywebsachTP@gmail.com</a>
+									</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="w3-address-grid">
+								<div class="w3-address-left">
+									<i class="fa fa-map-marker" aria-hidden="true"></i>
+								</div>
+								<div class="w3-address-right">
+									<h6>Vị trí</h6>
+									<p>137E Nguyễn Chí Thanh, Phường 9, Quận 5, Hồ Chí Minh</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<p class="copy-right">&copy 2018 LIBBOOKSTORE. All rights reserved.</p>
+		</div>
+	</div>
+	<!-- //footer -->
+
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/move-top.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script src="../Xu_ly/Xu_ly_3L.js"></script>
+	<script src="js/my_function.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+
+		//  here stars scrolling icon 
+		$(document).ready(function () {
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+
+		});
+	</script>
+	<script>
+		var Danh_sach_The_loai = Doc_Danh_sach_The_loai().Danh_sach_The_loai
+		var Danh_sach_Tac_gia = Doc_Danh_sach_Tac_gia().Danh_sach_Tac_gia
+		var Danh_sach_Nha_phat_hanh = Doc_Danh_sach_Nha_phat_hanh().Danh_sach_Nha_phat_hanh
+		Tao_The_hien_List_The_loai(Th_Nhom_the_loai_Index, Danh_sach_The_loai)
+		Tao_The_hien_List_Tac_gia(Th_Nhom_tac_gia_Index, Danh_sach_Tac_gia)
+		Tao_The_hien_List_Nha_phat_hanh(Th_Nhom_nha_phat_hanh_Index, Danh_sach_Nha_phat_hanh)
+	</script>
+</body>
+
+</html>

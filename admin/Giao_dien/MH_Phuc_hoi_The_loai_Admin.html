@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sách</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/my_custom.css">
+</head>
+
+<body>
+    
+
+    <div class="container">
+        <div class="alert alert-success text-center book-mt10" id="Th_Thong_bao">
+            PHỤC HỒI THỂ LOẠI
+        </div>
+    </div>
+    <div class="container">
+        <div class="row book-mt10">
+            <button type="button" class="btn btn-success" id="Th_Dong_y">
+                Đồng ý
+            </button>
+            <button type="button" class="btn btn-danger" id="Th_Bo_qua">
+                Bỏ qua
+            </button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" id="Th_Cha">
+
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="../Xu_ly/Xu_ly_3L.js"></script>
+    <script>
+        var Du_lieu = Doc_Danh_sach_Xoa_The_loai();
+        var Danh_sach_Xoa_The_loai = Du_lieu.Danh_sach_Xoa_The_loai
+        Tao_The_hien_Phuc_hoi_The_loai(Th_Cha, Danh_sach_Xoa_The_loai)
+        if (Danh_sach_Xoa_The_loai.length == 0) {
+            document.getElementById("Th_Dong_y").disabled = true;
+        }
+        function XL_Phuc_hoi_The_loai() {
+            var Danh_sach_Phuc_hoi = document.querySelectorAll(".PHUC_HOI")
+
+            var Danh_sach = []
+            Danh_sach_Phuc_hoi.forEach(The_loai => {
+                if (The_loai.checked) {
+                    var Ma_so = The_loai.getAttribute("Ma_so")
+                    var The_loai_Phuc_hoi = {
+                        "Ma_so": Ma_so,
+                    }
+                    Danh_sach.push(The_loai_Phuc_hoi)
+                }
+
+            })
+
+            var Kq = Ghi_Phuc_hoi_The_loai(Danh_sach)
+            return Kq
+
+        }
+
+        Th_Dong_y.onclick = () => {
+            var Danh_sach_Phuc_hoi = document.querySelectorAll(".PHUC_HOI")
+            Danh_sach_Phuc_hoi.forEach(The_loai => {
+                Th_Thong_bao.innerHTML = "Vui lòng check vào ô vuông để chọn Thể loại cần phục hồi";
+                if (The_loai.checked) {
+                    var Kq = XL_Phuc_hoi_The_loai()
+                    document.getElementById("Th_Dong_y").disabled = true;
+                    //console.log(Kq)
+                    if (Kq == "OK") {
+                        Th_Thong_bao.innerHTML = "Phục hồi thành công thể loại";
+                        sessionStorage.removeItem("Danh_sach_Chon")
+                        var delayInMilliseconds = 1500;
+                        setTimeout(function () {
+                            window.location = "MH_Phuc_hoi_The_loai_Admin.html"
+                        }, delayInMilliseconds);
+                    }
+                }
+            })
+
+
+        }
+
+        Th_Bo_qua.onclick = () => {
+            window.location = "MH_Danh_sach_The_loai_Admin.html"
+        }
+
+    </script>
+</body>
+
+</html>
