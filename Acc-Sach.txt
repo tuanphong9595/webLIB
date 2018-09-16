@@ -1,0 +1,43 @@
+﻿------acc gmail-----
+khachhangwebSach01@gmail.com
+888844441111AbC@
+
+-----acc gmail admin-----
+quanlywebsachTP@gmail.com
+555599994444AsD#
+
+----- acc github
+user: tuanphong9595
+mail: quanlywebsachTP@gmail.com
+pass: 5555599999tuanphong
+
+------acc mlab-------
+acc: tuan_phong
+email: quanlywebsachTP@gmail.com
+user: tuan_phong
+pass: 555599994444AsD#
+
+database username: db_tuan_phong
+pass: 54321asd
+database name: book_store
+
+-----acc heroku-------
+
+quanlywebsachTP@gmail.com
+555599994444AsD#
+
+mongoimport -h ds229732.mlab.com:29732 -d book_store -c Cua_hang -u db_tuan_phong -p 54321asd --file d:/Du_lieu/Cua_hang.json
+mongoimport -h ds229732.mlab.com:29732 -d book_store -c Nguoi_dung -u db_tuan_phong -p 54321asd --file d:/Du_lieu/Nguoi_dung.json
+mongoimport -h ds229732.mlab.com:29732 -d book_store -c Sach -u db_tuan_phong -p 54321asd --file d:/Du_lieu/Sach.json
+mongoimport -h ds229732.mlab.com:29732 -d book_store -c The_loai -u db_tuan_phong -p 54321asd --file d:/Du_lieu/The_loai.json
+mongoimport -h ds229732.mlab.com:29732 -d book_store -c Nha_phat_hanh -u db_tuan_phong -p 54321asd --file d:/Du_lieu/Nha_phat_hanh.json
+mongoimport -h ds229732.mlab.com:29732 -d book_store -c Tac_gia -u db_tuan_phong -p 54321asd --file d:/Du_lieu/Tac_gia.json
+
+===================
+
+Link WEb bán sách viết bằng javascript: 
+https://tuanphong9595.github.io/webLIB/
+https://tuanphong9595.github.io/webLIB/admin
+Tài khoản đăng nhật admin: 
+- User: phong_admin
+- Pass: 123
